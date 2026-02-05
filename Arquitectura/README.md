@@ -89,3 +89,29 @@ export class TaskRepository {
   findAll() { return [new Task(1, 'Aprender SOLID')]; }
 }
 ```
+
+# 🧠 PATRONES MODERNOS (NO GOF)
+
+## 🔹 Dependency Injection
+Permite desacoplar la creación de dependencias de la lógica de negocio, facilitando el testing y la mantenibilidad. Muy usado en frameworks modernos.
+
+## 🔹 Repository
+Abstrae el acceso a datos, permitiendo trabajar con colecciones de objetos como si fueran una base de datos en memoria. Facilita el cambio de fuente de datos y el testing.
+
+## 🔹 Unit of Work
+Gestiona un conjunto de operaciones como una única transacción, asegurando la consistencia y el control de cambios en el almacenamiento de datos.
+
+## 🔹 CQRS
+Separa los modelos de lectura y escritura, permitiendo optimizar y escalar cada uno de forma independiente. Útil en sistemas con alta demanda de consultas y comandos complejos.
+
+## 🔹 Event Sourcing
+En lugar de almacenar solo el estado actual, guarda todos los eventos que modifican el estado. Permite reconstruir el estado y auditar cambios fácilmente.
+
+## 🔹 Specification
+Permite encapsular reglas de negocio y criterios de consulta en objetos reutilizables y combinables, facilitando la validación y filtrado complejo.
+
+## 🔹 Clean Architecture
+Arquitectura que separa el dominio de detalles externos (frameworks, bases de datos, UI), facilitando el testing, la mantenibilidad y la evolución del sistema.
+
+## 🔹 Hexagonal Architecture
+También llamada Ports and Adapters, aísla el core de la aplicación de detalles externos mediante puertos y adaptadores, facilitando pruebas y cambios tecnológicos.

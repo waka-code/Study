@@ -1,0 +1,495 @@
+# Preguntas de Entrevista (Todas los niveles)
+
+## Fundamentos y Junior
+- ¿Qué es una variable?
+- ¿Qué es una función?
+- ¿Qué es un array?
+- ¿Qué es un objeto?
+- ¿Qué es una clase?
+- ¿Qué es herencia?
+- ¿Qué es polimorfismo?
+- ¿Qué es encapsulamiento?
+- ¿Qué es un ciclo for/while?
+- ¿Qué es una condición if/else?
+- ¿Qué es una promesa?
+- ¿Qué es async/await?
+- ¿Qué es una API?
+- ¿Qué es HTTP?
+- ¿Qué es REST?
+- ¿Qué es JSON?
+- ¿Qué es una base de datos?
+- ¿Qué es SQL?
+- ¿Qué es NoSQL?
+- ¿Qué es un commit?
+- ¿Qué es Git?
+- ¿Qué es un branch?
+- ¿Qué es merge?
+- ¿Qué es un conflicto de merge?
+- ¿Qué es un bug?
+- ¿Qué es un test unitario?
+- ¿Qué es un endpoint?
+- ¿Qué es una petición GET/POST/PUT/DELETE?
+- ¿Qué es un error 404/500?
+- ¿Qué es una cookie?
+- ¿Qué es una sesión?
+- ¿Qué es CORS?
+- ¿Qué es un token?
+- ¿Qué es JWT?
+- ¿Qué es HTTPS?
+- ¿Qué es un framework?
+- ¿Qué es una librería?
+- ¿Qué es un IDE?
+- ¿Qué es un entorno de desarrollo?
+- ¿Qué es una variable de entorno?
+- ¿Qué es un log?
+- ¿Qué es un stack trace?
+- ¿Qué es una excepción?
+- ¿Qué es un handler?
+- ¿Qué es una interfaz?
+- ¿Qué es un hook?
+- ¿Qué es un componente?
+- ¿Qué es un estado (state)?
+- ¿Qué es un efecto (effect)?
+- ¿Qué es un render?
+- ¿Qué es el DOM?
+- ¿Qué es el Virtual DOM?
+- ¿Qué es un SPA?
+- ¿Qué es SSR?
+- ¿Qué es CSR?
+- ¿Qué es lazy loading?
+- ¿Qué es memoization?
+- ¿Qué es una función pura?
+- ¿Qué es inmutabilidad?
+- ¿Qué es una closure?
+- ¿Qué es recursividad?
+- ¿Qué es un callback?
+- ¿Qué es debounce/throttle?
+- ¿Qué es una expresión regular?
+- ¿Qué es un hash?
+- ¿Qué es una clave primaria/foránea?
+- ¿Qué es normalización?
+- ¿Qué es un índice?
+- ¿Qué es una transacción?
+- ¿Qué es ACID?
+- ¿Qué es CAP?
+- ¿Qué es sharding?
+- ¿Qué es una réplica?
+- ¿Qué es escalado vertical/horizontal?
+- ¿Qué es caching?
+- ¿Qué es CDN?
+- ¿Qué es un load balancer?
+- ¿Qué es Docker?
+- ¿Qué es un contenedor?
+- ¿Qué es Kubernetes?
+- ¿Qué es CI/CD?
+- ¿Qué es un pipeline?
+- ¿Qué es un test de integración?
+- ¿Qué es un test E2E?
+- ¿Qué es contract testing?
+- ¿Qué es observabilidad?
+- ¿Qué es logging/metrics/tracing?
+- ¿Qué es una alerta?
+- ¿Qué es un microservicio?
+- ¿Qué es monolito?
+- ¿Qué es DDD?
+- ¿Qué es un bounded context?
+- ¿Qué es un value object?
+- ¿Qué es un aggregate?
+- ¿Qué es un repository?
+- ¿Qué es un domain event?
+- ¿Qué es Clean Architecture?
+- ¿Qué es Hexagonal Architecture?
+- ¿Qué es una capa de infraestructura?
+- ¿Qué es una capa de dominio?
+- ¿Qué es una capa de aplicación?
+- ¿Qué es una interfaz de puerto/adaptador?
+- ¿Qué es una API RESTful?
+- ¿Qué es GraphQL?
+- ¿Qué es WebSocket?
+- ¿Qué es OAuth2?
+- ¿Qué es rate limiting?
+- ¿Qué es XSS?
+- ¿Qué es CSRF?
+- ¿Qué es SQL Injection?
+- ¿Qué es OWASP Top 10?
+- ¿Qué es gestión de secretos?
+- ¿Qué es un despliegue blue/green?
+- ¿Qué es rollback?
+- ¿Qué es feature toggle?
+- ¿Qué es un circuito breaker?
+- ¿Qué es idempotencia?
+- ¿Qué es eventual consistency?
+- ¿Qué es una saga?
+- ¿Qué es resiliencia?
+- ¿Qué es tolerancia a fallos?
+- ¿Qué es un SLA?
+- ¿Qué es un SLO?
+- ¿Qué es un SLI?
+- ¿Qué es un test de carga?
+- ¿Qué es un test de estrés?
+- ¿Qué es un mock/stub/spy?
+- ¿Qué es inyección de dependencias?
+- ¿Qué es un patrón de diseño?
+- ¿Qué es Singleton/Factory/Adapter/Strategy/Observer/Command/State/Builder/Abstract Factory/Decorator/Facade?
+- ¿Qué es SOLID?
+- ¿Qué es el principio de responsabilidad única?
+- ¿Qué es el principio abierto/cerrado?
+- ¿Qué es el principio de sustitución de Liskov?
+- ¿Qué es el principio de segregación de interfaces?
+- ¿Qué es el principio de inversión de dependencias?
+- ¿Qué es un anti-patrón?
+- ¿Qué es un test flaky?
+- ¿Qué es Playwright?
+- ¿Qué es un entorno productivo/staging/dev?
+- ¿Qué es un rollback?
+- ¿Qué es un branch de hotfix?
+- ¿Qué es un release?
+- ¿Qué es versionado semántico?
+- ¿Qué es un breaking change?
+- ¿Qué es una migración de base de datos?
+- ¿Qué es un downtime?
+- ¿Qué es blue/green deployment?
+- ¿Qué es canary release?
+- ¿Qué es un health check?
+- ¿Qué es un endpoint de status?
+- ¿Qué es un API Gateway?
+- ¿Qué es un reverse proxy?
+- ¿Qué es un CDN?
+- ¿Qué es un edge server?
+- ¿Qué es una política de backup?
+- ¿Qué es disaster recovery?
+- ¿Qué es un SLA?
+- ¿Qué es un SLO?
+- ¿Qué es un SLI?
+- ¿Qué es un incidente?
+- ¿Qué es root cause analysis?
+- ¿Qué es un postmortem?
+- ¿Qué es un playbook de incidentes?
+- ¿Qué es un runbook?
+- ¿Qué es un dashboard de monitoreo?
+- ¿Qué es Prometheus/Grafana/ELK Stack?
+- ¿Qué es un alerting channel?
+- ¿Qué es un secreto?
+- ¿Qué es un vault?
+- ¿Qué es un token de acceso?
+- ¿Qué es un refresh token?
+- ¿Qué es un scope en OAuth2?
+- ¿Qué es un claim en JWT?
+- ¿Qué es un refresh token?
+- ¿Qué es un rate limiter distribuido?
+- ¿Qué es un API key?
+- ¿Qué es un CORS preflight?
+- ¿Qué es un CSP?
+- ¿Qué es un SSRF?
+- ¿Qué es un RCE?
+- ¿Qué es un DoS/DDoS?
+- ¿Qué es un honeypot?
+- ¿Qué es un pentest?
+- ¿Qué es un bug bounty?
+- ¿Qué es un CVE?
+- ¿Qué es un zero-day?
+- ¿Qué es un sandbox?
+- ¿Qué es un entorno aislado?
+- ¿Qué es un contenedor efímero?
+- ¿Qué es un sidecar?
+- ¿Qué es un operador de Kubernetes?
+- ¿Qué es un CRD?
+- ¿Qué es un pod?
+- ¿Qué es un deployment?
+- ¿Qué es un service en Kubernetes?
+- ¿Qué es un ingress?
+- ¿Qué es un namespace?
+- ¿Qué es un configmap?
+- ¿Qué es un secret en Kubernetes?
+- ¿Qué es un volumen persistente?
+- ¿Qué es un statefulset?
+- ¿Qué es un daemonset?
+- ¿Qué es un job/cronjob?
+- ¿Qué es un rolling update?
+- ¿Qué es un rollback en Kubernetes?
+- ¿Qué es un readiness/liveness probe?
+- ¿Qué es un autoscaler?
+- ¿Qué es un pod disruption budget?
+- ¿Qué es un affinity/anti-affinity?
+- ¿Qué es un toleration?
+- ¿Qué es un node pool?
+- ¿Qué es un cluster autoscaler?
+- ¿Qué es un cloud provider?
+- ¿Qué es IaaS/PaaS/SaaS?
+- ¿Qué es un VPC?
+- ¿Qué es un subnet?
+- ¿Qué es un firewall?
+- ¿Qué es un NAT gateway?
+- ¿Qué es un bastion host?
+- ¿Qué es un load balancer layer 4/7?
+- ¿Qué es un sticky session?
+- ¿Qué es un session affinity?
+- ¿Qué es un sticky cookie?
+- ¿Qué es un balanceo round robin?
+- ¿Qué es un weighted load balancing?
+- ¿Qué es un health check endpoint?
+- ¿Qué es un failover?
+- ¿Qué es un cold/warm/hot standby?
+- ¿Qué es un RPO/RTO?
+- ¿Qué es un SLA/SLO/SLI?
+- ¿Qué es un playbook?
+- ¿Qué es un runbook?
+- ¿Qué es un DRP?
+- ¿Qué es un BCP?
+- ¿Qué es un escalamiento automático?
+- ¿Qué es un spot instance?
+- ¿Qué es un preemptible VM?
+- ¿Qué es un rolling deployment?
+- ¿Qué es un blue/green deployment?
+- ¿Qué es un canary deployment?
+- ¿Qué es un feature flag?
+- ¿Qué es un dark launch?
+- ¿Qué es un A/B test?
+- ¿Qué es un shadow traffic?
+- ¿Qué es un chaos engineering?
+- ¿Qué es un fault injection?
+- ¿Qué es un circuit breaker?
+- ¿Qué es un bulkhead?
+- ¿Qué es un retry policy?
+- ¿Qué es un backoff exponencial?
+- ¿Qué es un dead letter queue?
+- ¿Qué es un event sourcing?
+- ¿Qué es un CQRS?
+- ¿Qué es un message broker?
+- ¿Qué es un pub/sub?
+- ¿Qué es un event bus?
+- ¿Qué es un webhook?
+- ¿Qué es un polling?
+- ¿Qué es un long polling?
+- ¿Qué es un SSE?
+- ¿Qué es un websocket?
+- ¿Qué es un API rate limit?
+- ¿Qué es un API quota?
+- ¿Qué es un SLA breach?
+- ¿Qué es un incident response?
+- ¿Qué es un incident commander?
+- ¿Qué es un post-incident review?
+- ¿Qué es un blameless postmortem?
+- ¿Qué es un RCA?
+- ¿Qué es un SRE?
+- ¿Qué es un error budget?
+- ¿Qué es un toil?
+- ¿Qué es un runbook?
+- ¿Qué es un playbook?
+- ¿Qué es un escalation policy?
+- ¿Qué es un on-call?
+- ¿Qué es un paging?
+- ¿Qué es un alert fatigue?
+- ¿Qué es un synthetic monitoring?
+- ¿Qué es un real user monitoring?
+- ¿Qué es un APM?
+- ¿Qué es un distributed tracing?
+- ¿Qué es un span?
+- ¿Qué es un trace?
+- ¿Qué es un sampling?
+- ¿Qué es un log aggregation?
+- ¿Qué es un log shipping?
+- ¿Qué es un log rotation?
+- ¿Qué es un log retention?
+- ¿Qué es un SIEM?
+- ¿Qué es un SOAR?
+- ¿Qué es un SOC?
+- ¿Qué es un incident response plan?
+- ¿Qué es un playbook de seguridad?
+- ¿Qué es un honeypot?
+- ¿Qué es un deception technology?
+- ¿Qué es un threat intelligence?
+- ¿Qué es un IOC?
+- ¿Qué es un TTP?
+- ¿Qué es un MITRE ATT&CK?
+- ¿Qué es un kill chain?
+- ¿Qué es un red team/blue team/purple team?
+- ¿Qué es un pentest?
+- ¿Qué es un bug bounty?
+- ¿Qué es un zero trust?
+- ¿Qué es un least privilege?
+- ¿Qué es un RBAC?
+- ¿Qué es un ABAC?
+- ¿Qué es un PBAC?
+- ¿Qué es un IAM?
+- ¿Qué es un MFA?
+- ¿Qué es un SSO?
+- ¿Qué es un federated identity?
+- ¿Qué es un SCIM?
+- ¿Qué es un provisioning?
+- ¿Qué es un deprovisioning?
+- ¿Qué es un JIT access?
+- ¿Qué es un break-glass account?
+- ¿Qué es un privileged access management?
+- ¿Qué es un session hijacking?
+- ¿Qué es un session fixation?
+- ¿Qué es un clickjacking?
+- ¿Qué es un open redirect?
+- ¿Qué es un SSRF?
+- ¿Qué es un RCE?
+- ¿Qué es un XXE?
+- ¿Qué es un path traversal?
+- ¿Qué es un directory listing?
+- ¿Qué es un insecure deserialization?
+- ¿Qué es un insecure direct object reference?
+- ¿Qué es un mass assignment?
+- ¿Qué es un insecure default configuration?
+- ¿Qué es un security misconfiguration?
+- ¿Qué es un hardcoded secret?
+- ¿Qué es un sensitive data exposure?
+- ¿Qué es un insufficient logging & monitoring?
+- ¿Qué es un broken access control?
+- ¿Qué es un broken authentication?
+- ¿Qué es un broken session management?
+- ¿Qué es un insecure communication?
+- ¿Qué es un insecure cryptographic storage?
+- ¿Qué es un weak password policy?
+- ¿Qué es un brute force attack?
+- ¿Qué es un credential stuffing?
+- ¿Qué es un password spraying?
+- ¿Qué es un phishing?
+- ¿Qué es un spear phishing?
+- ¿Qué es un whaling?
+- ¿Qué es un vishing?
+- ¿Qué es un smishing?
+- ¿Qué es un social engineering?
+- ¿Qué es un tailgating?
+- ¿Qué es un shoulder surfing?
+- ¿Qué es un dumpster diving?
+- ¿Qué es un pretexting?
+- ¿Qué es un baiting?
+- ¿Qué es un quid pro quo?
+- ¿Qué es un watering hole attack?
+- ¿Qué es un drive-by download?
+- ¿Qué es un malvertising?
+- ¿Qué es un ransomware?
+- ¿Qué es un spyware?
+- ¿Qué es un adware?
+- ¿Qué es un trojan?
+- ¿Qué es un worm?
+- ¿Qué es un virus?
+- ¿Qué es un rootkit?
+- ¿Qué es un botnet?
+- ¿Qué es un C2 server?
+- ¿Qué es un DGA?
+- ¿Qué es un fast flux?
+- ¿Qué es un sinkhole?
+- ¿Qué es un takedown?
+- ¿Qué es un takedown request?
+- ¿Qué es un takedown notice?
+- ¿Qué es un DMCA?
+- ¿Qué es un copyright strike?
+- ¿Qué es un trademark infringement?
+- ¿Qué es un patent troll?
+- ¿Qué es un cease and desist?
+- ¿Qué es un NDA?
+- ¿Qué es un SLA?
+- ¿Qué es un MSA?
+- ¿Qué es un SOW?
+- ¿Qué es un PO?
+- ¿Qué es un invoice?
+- ¿Qué es un purchase order?
+- ¿Qué es un RFP?
+- ¿Qué es un RFQ?
+- ¿Qué es un SOW?
+- ¿Qué es un NDA?
+- ¿Qué es un MOU?
+- ¿Qué es un LOI?
+- ¿Qué es un term sheet?
+- ¿Qué es un cap table?
+- ¿Qué es un vesting?
+- ¿Qué es un cliff?
+- ¿Qué es un option pool?
+- ¿Qué es un dilution?
+- ¿Qué es un SAFE?
+- ¿Qué es un convertible note?
+- ¿Qué es un equity round?
+- ¿Qué es un seed round?
+- ¿Qué es una serie A/B/C?
+- ¿Qué es un IPO?
+- ¿Qué es un M&A?
+- ¿Qué es un due diligence?
+- ¿Qué es un earnout?
+- ¿Qué es un escrow?
+- ¿Qué es un lockup period?
+- ¿Qué es un secondary sale?
+- ¿Qué es un buyback?
+- ¿Qué es un drag-along/tag-along?
+- ¿Qué es un right of first refusal?
+- ¿Qué es un co-sale right?
+- ¿Qué es un board observer?
+- ¿Qué es un board seat?
+- ¿Qué es un board resolution?
+- ¿Qué es un board consent?
+- ¿Qué es un board meeting?
+- ¿Qué es un board pack?
+- ¿Qué es un board minute?
+- ¿Qué es un board agenda?
+- ¿Qué es un board action?
+- ¿Qué es un board approval?
+- ¿Qué es un board committee?
+- ¿Qué es un board charter?
+- ¿Qué es un board policy?
+- ¿Qué es un board evaluation?
+- ¿Qué es un board succession plan?
+- ¿Qué es un board diversity policy?
+- ¿Qué es un board remuneration policy?
+- ¿Qué es un board compensation committee?
+- ¿Qué es un board audit committee?
+- ¿Qué es un board risk committee?
+- ¿Qué es un board nomination committee?
+- ¿Qué es un board governance committee?
+- ¿Qué es un board compliance committee?
+- ¿Qué es un board ethics committee?
+- ¿Qué es un board sustainability committee?
+- ¿Qué es un board technology committee?
+- ¿Qué es un board innovation committee?
+- ¿Qué es un board digital committee?
+- ¿Qué es un board transformation committee?
+- ¿Qué es un board strategy committee?
+- ¿Qué es un board investment committee?
+- ¿Qué es un board M&A committee?
+- ¿Qué es un board IPO committee?
+- ¿Qué es un board fundraising committee?
+- ¿Qué es un board legal committee?
+- ¿Qué es un board HR committee?
+- ¿Qué es un board remuneration committee?
+- ¿Qué es un board compensation committee?
+- ¿Qué es un board audit committee?
+- ¿Qué es un board risk committee?
+- ¿Qué es un board nomination committee?
+- ¿Qué es un board governance committee?
+- ¿Qué es un board compliance committee?
+- ¿Qué es un board ethics committee?
+- ¿Qué es un board sustainability committee?
+- ¿Qué es un board technology committee?
+- ¿Qué es un board innovation committee?
+- ¿Qué es un board digital committee?
+- ¿Qué es un board transformation committee?
+- ¿Qué es un board strategy committee?
+- ¿Qué es un board investment committee?
+- ¿Qué es un board M&A committee?
+- ¿Qué es un board IPO committee?
+- ¿Qué es un board fundraising committee?
+- ¿Qué es un board legal committee?
+- ¿Qué es un board HR committee?
+- ¿Qué es un board remuneration committee?
+- ¿Qué es un board compensation committee?
+- ¿Qué es un board audit committee?
+- ¿Qué es un board risk committee?
+- ¿Qué es un board nomination committee?
+- ¿Qué es un board governance committee?
+- ¿Qué es un board compliance committee?
+- ¿Qué es un board ethics committee?
+- ¿Qué es un board sustainability committee?
+- ¿Qué es un board technology committee?
+- ¿Qué es un board innovation committee?
+- ¿Qué es un board digital committee?
+- ¿Qué es un board transformation committee?
+- ¿Qué es un board strategy committee?
+- ¿Qué es un board investment committee?
+- ¿Qué es un board M&A committee?
+- ¿Qué es un board IPO committee?
+- ¿Qué es un board fundraising committee?
+- ¿Qué es un board legal committee?
+- ¿Qué es un board HR committee?
