@@ -14,20 +14,6 @@ La arquitectura de microservicios consiste en dividir una aplicación en pequeñ
 - Resiliencia ante fallos.
 - Flexibilidad tecnológica.
 
-## Ejemplo de estructura
-```
-Microservicios/
-├── auth-service/
-│   ├── app.ts
-│   └── AuthService.md
-├── order-service/
-│   ├── app.ts
-│   └── OrderService.md
-├── product-service/
-│   ├── app.ts
-│   └── ProductService.md
-└── README.md
-```
 
 ## Ejemplo de definición de un microservicio (Node.js)
 ```js

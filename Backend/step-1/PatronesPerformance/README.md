@@ -1,6 +1,34 @@
 # ⚡ Patrones de Performance en la Programación
 
-Lista de patrones clave para entrevistas senior, con definición breve de cada uno.
+
+## Índice de patrones
+- [Caching Pattern](01-caching-pattern.md)
+- [Lazy Loading Pattern](02-lazy-loading-pattern.md)
+- [Eager Loading Pattern](03-eager-loading-pattern.md)
+- [Pagination Pattern](04-pagination-pattern.md)
+- [Batch Processing Pattern](05-batch-processing-pattern.md)
+- [Throttling Pattern](06-throttling-pattern.md)
+- [Rate Limiting Pattern](07-rate-limiting-pattern.md)
+- [Debounce Pattern](08-debounce-pattern.md)
+- [Throttle Pattern](09-throttle-pattern.md)
+- [Asynchronous Processing Pattern](10-asynchronous-processing-pattern.md)
+- [Queue-Based Load Leveling Pattern](11-queue-based-load-leveling-pattern.md)
+- [Circuit Breaker Pattern](12-circuit-breaker-pattern.md)
+- [Bulkhead Pattern](13-bulkhead-pattern.md)
+- [Connection Pooling Pattern](14-connection-pooling-pattern.md)
+- [Read/Write Splitting Pattern](15-read-write-splitting-pattern.md)
+- [Horizontal Scaling Pattern](16-horizontal-scaling-pattern.md)
+- [Vertical Scaling Pattern](17-vertical-scaling-pattern.md)
+- [Data Denormalization Pattern](18-data-denormalization-pattern.md)
+- [Indexing Pattern](19-indexing-pattern.md)
+- [Content Delivery Network (CDN) Pattern](20-cdn-pattern.md)
+- [Compression Pattern](21-compression-pattern.md)
+- [Streaming Pattern](22-streaming-pattern.md)
+- [Memoization Pattern](23-memoization-pattern.md)
+- [Prefetching Pattern](24-prefetching-pattern.md)
+- [Server-Side Rendering (SSR) Pattern](25-ssr-pattern.md)
+- [Streaming de respuestas](streaming-respuestas.md)
+- [Keep-Alive](keep-alive.md)
 
 ---
 
