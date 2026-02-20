@@ -18,6 +18,128 @@ El Event Loop de Node.js **NO es el mismo** que el del navegador, aunque el conc
 
 ---
 
+## Call Stack
+
+El **Call Stack** (pila de llamadas) es donde V8 ejecuta el código JavaScript de forma síncrona. Funciona como una pila LIFO (Last In, First Out).
+
+```javascript
+function third() {
+  console.log('third');   // 3. Se ejecuta y sale del stack
+}
+
+function second() {
+  third();                // 2. Entra al stack → llama a third()
+}
+
+function first() {
+  second();               // 1. Entra al stack → llama a second()
+}
+
+first();
+
+// Stack frames (de abajo a arriba):
+// [ first() → second() → third() ]
+// Cuando third() termina, sale del stack
+// Cuando second() termina, sale del stack
+// Cuando first() termina, el stack queda vacío
+```
+
+**Regla clave:** El Event Loop solo puede procesar callbacks cuando el Call Stack está **vacío**.
+
+```javascript
+setTimeout(() => console.log('timer'), 0);
+console.log('sync');
+
+// Aunque el timer sea 0ms, "sync" siempre imprime primero
+// porque el callback espera a que el Call Stack esté vacío
+```
+
+---
+
+## Macrotasks vs Microtasks
+
+JavaScript tiene dos tipos de colas de tareas diferidas:
+
+### Macrotasks (Task Queue)
+Son tareas de "mayor peso" programadas para la siguiente iteración del Event Loop.
+
+**APIs que generan macrotasks:**
+- `setTimeout()`
+- `setInterval()`
+- `setImmediate()` (Node.js)
+- Callbacks de I/O (`fs.readFile`, red, etc.)
+- Callbacks de `close` events
+
+### Microtasks (Microtask Queue)
+Son tareas de "menor peso" que se ejecutan **antes** de que el Event Loop pase a la siguiente fase o procese el siguiente macrotask.
+
+**APIs que generan microtasks:**
+- `Promise.then()` / `Promise.catch()` / `Promise.finally()`
+- `queueMicrotask()`
+- `process.nextTick()` (técnicamente es una "nextTick queue" con prioridad aún mayor)
+
+### Orden de Ejecución
+
+```
+┌─────────────────────────────────────────────────┐
+│               Código Síncrono                   │
+│               (Call Stack)                      │
+└──────────────────────┬──────────────────────────┘
+                       │ Stack vacío
+                       ▼
+┌─────────────────────────────────────────────────┐
+│          process.nextTick queue                 │  ← Máxima prioridad
+└──────────────────────┬──────────────────────────┘
+                       ▼
+┌─────────────────────────────────────────────────┐
+│             Microtask Queue                     │  ← Promises
+│         (se vacía completamente)                │
+└──────────────────────┬──────────────────────────┘
+                       ▼
+┌─────────────────────────────────────────────────┐
+│             Macrotask Queue                     │  ← setTimeout, I/O
+│   (procesa UN macrotask, luego vuelve arriba)   │
+└─────────────────────────────────────────────────┘
+```
+
+```javascript
+console.log('1: sync');
+
+setTimeout(() => console.log('2: macrotask'), 0);
+
+Promise.resolve()
+  .then(() => console.log('3: microtask'));
+
+queueMicrotask(() => console.log('4: microtask'));
+
+console.log('5: sync');
+
+// Salida:
+// 1: sync
+// 5: sync
+// 3: microtask   ← microtasks antes que macrotasks
+// 4: microtask
+// 2: macrotask
+```
+
+**Punto clave:** Entre cada macrotask, se vacía **toda** la cola de microtasks.
+
+```javascript
+setTimeout(() => {
+  console.log('macrotask 1');
+  Promise.resolve().then(() => console.log('microtask después de macrotask 1'));
+}, 0);
+
+setTimeout(() => console.log('macrotask 2'), 0);
+
+// Salida:
+// macrotask 1
+// microtask después de macrotask 1   ← se ejecuta ANTES de macrotask 2
+// macrotask 2
+```
+
+---
+
 ## Las 6 Fases del Event Loop en Node
 
 ```

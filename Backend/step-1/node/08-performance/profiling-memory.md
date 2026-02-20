@@ -24,6 +24,202 @@ const arr = new Array(1e6).fill('x');
 console.log('After:', process.memoryUsage().heapUsed);
 ```
 
+## Causas Comunes de Memory Leaks
+
+### 1. Variables Globales que Crecen
+
+```javascript
+// ❌ Acumula indefinidamente
+const logs = [];
+app.use((req, res, next) => {
+  logs.push({ url: req.url, time: Date.now() }); // Nunca se limpia
+  next();
+});
+
+// ✅ Límite fijo
+const logs = [];
+const MAX_LOGS = 1000;
+app.use((req, res, next) => {
+  if (logs.length >= MAX_LOGS) logs.shift(); // Elimina el más viejo
+  logs.push({ url: req.url, time: Date.now() });
+  next();
+});
+```
+
+### 2. Closures que Retienen Objetos Grandes
+
+```javascript
+// ❌ La closure retiene bigData aunque ya no se necesite
+function processData() {
+  const bigData = new Array(1e6).fill('x'); // 8MB
+
+  return function getFirst() {
+    return bigData[0]; // bigData nunca se libera mientras getFirst exista
+  };
+}
+
+const getFirst = processData();
+// bigData sigue en memoria mientras getFirst esté referenciado
+
+// ✅ Extraer solo lo necesario
+function processData() {
+  const bigData = new Array(1e6).fill('x');
+  const first = bigData[0]; // Solo guarda lo que necesitas
+
+  return function getFirst() {
+    return first; // bigData puede ser GC'd
+  };
+}
+```
+
+### 3. Timers / Intervals sin Limpiar
+
+```javascript
+// ❌ El interval mantiene vivo el objeto user y su scope
+function startUserSession(user) {
+  const interval = setInterval(() => {
+    ping(user.id); // Referencia a user → no puede ser GC'd
+  }, 5000);
+  // ¿Quién limpia este interval?
+}
+
+// ✅ Cleanup explícito
+function startUserSession(user) {
+  const interval = setInterval(() => {
+    ping(user.id);
+  }, 5000);
+
+  return function cleanup() {
+    clearInterval(interval); // user puede ser GC'd después de esto
+  };
+}
+
+const cleanup = startUserSession(user);
+// Cuando la sesión termina:
+cleanup();
+```
+
+### 4. Event Listeners sin Remover
+
+```javascript
+// ❌ Cada llamada agrega un listener nuevo
+function setupFeature(emitter) {
+  emitter.on('data', (chunk) => {
+    processChunk(chunk);
+  });
+}
+
+// Si setupFeature se llama 100 veces → 100 listeners acumulados
+// Node lanza warning: MaxListenersExceededWarning
+
+// ✅ Remover listener cuando ya no se necesita
+function setupFeature(emitter) {
+  const handler = (chunk) => processChunk(chunk);
+
+  emitter.on('data', handler);
+
+  return function teardown() {
+    emitter.off('data', handler); // o emitter.removeListener('data', handler)
+  };
+}
+
+// ✅ Alternativa: usar once() si solo necesitas el primer evento
+emitter.once('data', (chunk) => processChunk(chunk));
+```
+
+### 5. Caches sin Límite ni Expiración
+
+```javascript
+// ❌ Cache que crece para siempre
+const cache = new Map();
+async function getUser(id) {
+  if (!cache.has(id)) {
+    cache.set(id, await db.findUser(id));
+  }
+  return cache.get(id);
+}
+
+// ✅ WeakMap: el GC puede limpiar valores si la key es recogida
+const cache = new WeakMap();
+// Solo funciona si las keys son objetos (no strings/numbers)
+
+// ✅ LRU con límite de tamaño
+const LRU = require('lru-cache');
+const cache = new LRU({
+  max: 500,           // Máximo 500 items
+  ttl: 1000 * 60 * 5 // 5 minutos de vida
+});
+```
+
+---
+
+## WeakMap y WeakRef: Prevención Moderna de Leaks
+
+### WeakMap
+Las keys de un `WeakMap` son referencias débiles: si el objeto-key no tiene otras referencias, el GC lo puede recolectar junto con su valor.
+
+```javascript
+// Caso de uso: metadata asociada a objetos sin prevenir GC
+const metadata = new WeakMap();
+
+class Request {
+  constructor(url) {
+    this.url = url;
+    metadata.set(this, { startTime: Date.now() }); // No previene GC de 'this'
+  }
+}
+
+function getRequestTime(req) {
+  return metadata.get(req)?.startTime;
+}
+
+// Cuando 'req' ya no tiene referencias fuertes, GC limpia
+// tanto el Request como su entrada en el WeakMap
+let req = new Request('/api/data');
+const time = getRequestTime(req);
+
+req = null; // El WeakMap no impide que req sea recogido por GC
+```
+
+### WeakRef (Node 14.6+)
+Permite tener una referencia a un objeto que el GC puede limpiar.
+
+```javascript
+// Caso de uso: cache que cede memoria bajo presión
+class SoftCache {
+  constructor() {
+    this._cache = new Map(); // Map<key, WeakRef<value>>
+  }
+
+  set(key, value) {
+    this._cache.set(key, new WeakRef(value));
+  }
+
+  get(key) {
+    const ref = this._cache.get(key);
+    if (!ref) return undefined;
+
+    const value = ref.deref(); // null si fue recolectado por GC
+    if (!value) {
+      this._cache.delete(key); // Limpiar entrada muerta
+      return undefined;
+    }
+    return value;
+  }
+}
+
+const cache = new SoftCache();
+let bigObject = { data: new Array(1e6).fill('x') };
+
+cache.set('key', bigObject);
+console.log(cache.get('key')); // Retorna bigObject
+
+bigObject = null; // El GC PUEDE (no garantizado) recolectar el objeto
+// En algún momento, cache.get('key') puede retornar undefined
+```
+
+---
+
 ## Detectar Memory Leaks
 
 ### Patrón: Acumulación
@@ -84,29 +280,119 @@ function loadData() {
 }
 ```
 
-## Heap Snapshots (Inspección Manual)
+## Verificar Leak con GC Forzado
+
+Antes de analizar heap snapshots, confirma que existe un leak real:
+
+```bash
+# Forzar GC manualmente con --expose-gc
+node --expose-gc app.js
+```
 
 ```javascript
-const fs = require('fs');
+// En tu código:
+global.gc(); // Fuerza GC
+
+const before = process.memoryUsage().heapUsed;
+
+// ... operación sospechosa ...
+global.gc();
+
+const after = process.memoryUsage().heapUsed;
+const diff = (after - before) / 1024 / 1024;
+
+console.log(`Memory diff: +${diff.toFixed(2)} MB`);
+
+// Si después de GC la memoria no baja → leak real
+// Si baja → era memoria temporal (esperado)
+```
+
+---
+
+## Heap Snapshots: Workflow Completo
+
+### 1. Tomar Snapshots
+
+```javascript
 const v8 = require('v8');
 
-// Tomar snapshot
-function takeHeapSnapshot() {
-  const filename = `heap-${Date.now()}.heapsnapshot`;
-  const snapshot = v8.writeHeapSnapshot(filename);
-  console.log(`Snapshot saved: ${filename}`);
+// Snapshot en código
+function takeHeapSnapshot(label = '') {
+  const filename = `heap-${label}-${Date.now()}.heapsnapshot`;
+  v8.writeHeapSnapshot(filename);
+  console.log(`Snapshot guardado: ${filename}`);
+  return filename;
 }
 
-// Endpoint para disparar snapshot
-app.get('/debug/heap-snapshot', (req, res) => {
-  takeHeapSnapshot();
-  res.json({ ok: true });
-});
-
-// Usar desde CLI
-// node --inspect app.js
-// Luego en DevTools: Memory → Take snapshot
+// Uso: tomar baseline, hacer operación, tomar segundo snapshot
+takeHeapSnapshot('before');
+// ... código sospechoso ...
+takeHeapSnapshot('after');
 ```
+
+```bash
+# O desde CLI con --inspect
+node --inspect app.js
+# Abrir: chrome://inspect
+# DevTools → Memory → Take snapshot
+```
+
+### 2. Analizar en Chrome DevTools
+
+**Columnas clave:**
+- **Shallow size:** Memoria que ocupa el objeto en sí (sin sus referencias)
+- **Retained size:** Memoria total que se liberaría si se elimina este objeto (incluye todo lo que referencia)
+- **Retainers:** Qué objetos están previniendo que este sea GC'd
+
+**Flujo para encontrar el leak:**
+
+1. Tomar snapshot **antes** de la operación
+2. Ejecutar la operación varias veces
+3. Tomar snapshot **después**
+4. En DevTools: seleccionar "Comparison" entre los dos snapshots
+5. Ordenar por **"Size Delta"** (Δ) de mayor a menor
+6. Objetos con delta positivo grande = sospechosos
+7. Expandir → ver "Retainers" → traza qué los mantiene vivos
+
+### 3. Buscar Retainers: El Rastro del Leak
+
+```
+Array @123        retained: 45MB  ← sospechoso
+  └─ cache Map @456
+       └─ module.exports @789
+            └─ (global scope)    ← aquí está el leak: referencia global sin limpiar
+```
+
+---
+
+## Profiling Built-in: `--heap-prof` (Node 12+)
+
+Sin instalar ninguna librería:
+
+```bash
+# Generar heap profile durante ejecución
+node --heap-prof app.js
+
+# Con más detalle
+node --heap-prof --heap-prof-interval=512 app.js
+# (un sample cada 512 bytes de allocación)
+
+# Genera: Heap.${pid}.${tid}.${sequence}.heapprofile
+```
+
+```bash
+# Profiling de CPU built-in
+node --prof app.js
+# Genera: isolate-0x*.log
+
+# Procesar el log
+node --prof-process isolate-0x*.log > profile.txt
+cat profile.txt
+```
+
+**Abrir `.heapprofile` en Chrome DevTools:**
+- DevTools → Memory → Load Profile → selecciona el archivo
+- Muestra dónde se están allocando bytes (por función)
 
 ## Profiling de CPU
 
@@ -311,6 +597,34 @@ const good = 'scoped';
 
 ## Pregunta de Entrevista
 
-**¿Cómo detecta un memory leak en Node.js?**
+**P: ¿Cómo detectarías y solucionarías un memory leak en Node.js en producción?**
 
-Monitorea `process.memoryUsage().heapUsed` periódicamente. Si crece consistentemente sin bajar (incluso después de GC), hay leak. Use heap snapshots para comparar antes/después, o Clinic.js para análisis automático. Causas: referencias globales no liberadas, event listeners sin cleanup, caches sin límite.
+**R:**
+
+**1. Detectar que hay un leak:**
+- Monitorear `process.memoryUsage().heapUsed` periódicamente; si crece de forma consistente sin bajar tras GC, hay leak
+- Síntomas: RSs crece sin parar, GC frecuente, eventual OOM crash
+
+**2. Confirmar el leak (local):**
+```bash
+node --expose-gc app.js
+# Forzar GC y medir antes/después de la operación sospechosa
+```
+
+**3. Localizar el leak:**
+- Tomar dos heap snapshots (antes y después de reproducir el leak)
+- En Chrome DevTools → Comparison → ordenar por "Size Delta"
+- Seguir los Retainers para encontrar qué referencia impide el GC
+
+**4. Causas más comunes:**
+- Caches / arrays globales sin límite
+- Event listeners sin `removeListener()`
+- Closures que retienen objetos grandes innecesariamente
+- Timers / intervals sin `clearInterval()`
+
+**5. Soluciones por causa:**
+- Cache → `lru-cache` con `max` y `ttl`
+- Listeners → `removeListener()` o `once()`
+- Closures → extraer solo el valor necesario, no la referencia al objeto completo
+- Timers → siempre guardar el id y llamar `clearInterval()`/`clearTimeout()`
+- Objetos asociados a otros → usar `WeakMap` en vez de `Map`

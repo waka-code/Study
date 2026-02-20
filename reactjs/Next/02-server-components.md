@@ -4,6 +4,8 @@ Por defecto, los componentes en Next.js son **Server Components**. Estos compone
 
 ## ¿Qué son los Server Components?
 
+SSR – Server Side Rendering
+
 Los Server Components son una característica de React que permite renderizar componentes en el servidor. En Next.js, estos son el tipo de componente predeterminado. Se utilizan principalmente para tareas que no requieren interactividad en el cliente, como la obtención de datos o la generación de contenido estático.
 
 **Ventajas:**
@@ -45,6 +47,17 @@ Aunque los Server Components son el predeterminado en Next.js, hay casos en los 
 - Cuando necesitas manejar eventos del usuario, como clics o entradas de texto.
 - Si necesitas usar hooks de React como `useState` o `useEffect`.
 - Para componentes que dependen de APIs del navegador, como `localStorage` o `window`.
+
+### Ventajas de los Client Components
+- Permiten manejar interactividad y eventos del usuario directamente en el navegador.
+- Acceso a APIs del navegador como `window`, `document`, `localStorage`, etc.
+- Uso de hooks de React (`useState`, `useEffect`, etc.) para gestionar estado y efectos secundarios.
+- Ideal para componentes que requieren una experiencia dinámica y reactiva.
+
+### Desventajas de los Client Components
+- Mayor cantidad de JavaScript enviado al cliente, lo que puede afectar el rendimiento y los tiempos de carga.
+- Menor aprovechamiento de la renderización en el servidor, perdiendo algunos beneficios de SEO y performance.
+- La lógica y el estado se gestionan en el cliente, lo que puede complicar la sincronización con el servidor en aplicaciones complejas.
 
 Para definir un Client Component, simplemente agrega la directiva `"use client"` al inicio del archivo:
 

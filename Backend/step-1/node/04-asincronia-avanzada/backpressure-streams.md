@@ -1,4 +1,191 @@
-# Backpressure en Streams
+# Streams, Buffers y Backpressure
+
+## Buffer vs Stream: La Diferencia Fundamental
+
+### Buffer
+Un **Buffer** carga todos los datos en memoria **antes** de procesarlos.
+
+```javascript
+const fs = require('fs');
+
+// Buffer: Lee TODO el archivo en memoria
+const data = fs.readFileSync('video.mp4');     // Espera a tener todos los bytes
+console.log(data.length);                       // Solo entonces puedes procesarlo
+```
+
+**Problema con buffers en archivos grandes:**
+- Archivo de 1 GB → necesita 1 GB de RAM
+- 10 requests simultáneas → 10 GB de RAM → Crash
+
+### Stream
+Un **Stream** procesa datos en **chunks** (trozos), uno a la vez, sin cargar todo en memoria.
+
+```javascript
+const fs = require('fs');
+
+// Stream: Procesa en chunks (default ~64KB cada uno)
+const stream = fs.createReadStream('video.mp4');
+
+stream.on('data', (chunk) => {
+  console.log(`Chunk recibido: ${chunk.length} bytes`);
+  // Procesa este chunk, luego el siguiente
+});
+
+stream.on('end', () => console.log('Terminado'));
+```
+
+**Ventaja:** Memoria constante sin importar el tamaño del archivo (~64KB por conexión).
+
+### Comparación Directa
+
+| | Buffer | Stream |
+|---|---|---|
+| **Cuándo procesa** | Cuando tiene todos los datos | Chunk por chunk |
+| **Uso de memoria** | = tamaño del archivo | ~64KB constante |
+| **Latencia** | Alta (espera descarga completa) | Baja (procesa al recibir) |
+| **Ideal para** | Archivos pequeños, JSON | Archivos grandes, video, uploads |
+| **API Node** | `fs.readFileSync`, `fs.readFile` | `fs.createReadStream` |
+
+```javascript
+// BUFFER: Espera y carga todo
+fs.readFile('big-file.mp4', (err, data) => {
+  res.send(data); // Envía TODO de golpe
+});
+
+// STREAM: Envía mientras lee
+fs.createReadStream('big-file.mp4').pipe(res); // Envía chunk a chunk
+```
+
+---
+
+## Tipos de Streams en Node.js
+
+Node.js tiene 4 tipos de streams:
+
+### 1. Readable (Legible)
+Fuente de datos de la que puedes leer.
+
+```javascript
+const fs = require('fs');
+const { Readable } = require('stream');
+
+// Readable nativo
+const fileStream = fs.createReadStream('file.txt');
+
+// Readable custom
+const readable = new Readable({
+  read(size) {
+    this.push('chunk de datos');
+    this.push(null); // null = fin del stream
+  }
+});
+
+// Dos modos:
+// Flowing mode (empuja datos automáticamente)
+readable.on('data', (chunk) => console.log(chunk));
+
+// Paused mode (pides datos manualmente)
+readable.read(64); // Lee 64 bytes
+```
+
+### 2. Writable (Escribible)
+Destino al que puedes escribir datos.
+
+```javascript
+const fs = require('fs');
+const { Writable } = require('stream');
+
+// Writable nativo
+const fileStream = fs.createWriteStream('output.txt');
+
+// Writable custom
+const writable = new Writable({
+  write(chunk, encoding, callback) {
+    console.log('Recibido:', chunk.toString());
+    callback(); // Indica que terminaste con este chunk
+  }
+});
+
+writable.write('hola');
+writable.write('mundo');
+writable.end();
+```
+
+### 3. Duplex (Legible + Escribible)
+Puede leer Y escribir de forma independiente. Ejemplo: sockets TCP.
+
+```javascript
+const { Duplex } = require('stream');
+const net = require('net');
+
+// Un socket TCP es Duplex
+const socket = net.connect(80, 'example.com');
+socket.write('GET / HTTP/1.1\r\n\r\n'); // Escribe request
+socket.on('data', (chunk) => {           // Lee response
+  console.log(chunk.toString());
+});
+```
+
+### 4. Transform (Transforma datos)
+Lee datos, los transforma, y los escribe. El output depende del input.
+
+```javascript
+const { Transform } = require('stream');
+const zlib = require('zlib');
+
+// Transform custom: convierte a mayúsculas
+class UpperCase extends Transform {
+  _transform(chunk, encoding, callback) {
+    callback(null, chunk.toString().toUpperCase());
+  }
+}
+
+// Transform nativo: compresión gzip
+const gzip = zlib.createGzip();
+
+// Uso: leer → transformar → escribir
+const fs = require('fs');
+fs.createReadStream('input.txt')
+  .pipe(new UpperCase())
+  .pipe(gzip)
+  .pipe(fs.createWriteStream('output.txt.gz'));
+```
+
+### Resumen de Tipos
+
+```
+Readable  ──────────────────────────► (leer)
+Writable                ◄──────────── (escribir)
+Duplex    ◄─────────────────────────► (leer Y escribir)
+Transform ──────────── → [modifica] → (leer, transformar, escribir)
+```
+
+---
+
+## ¿Cuándo usar Buffer vs Stream?
+
+```javascript
+// ✅ Buffer: JSON de API pequeña
+app.get('/config', async (req, res) => {
+  const data = await fs.promises.readFile('config.json');
+  res.json(JSON.parse(data));  // Archivo pequeño, buffer OK
+});
+
+// ✅ Stream: Descarga de archivos
+app.get('/download/:file', (req, res) => {
+  fs.createReadStream(`./files/${req.params.file}`).pipe(res); // Stream
+});
+
+// ✅ Stream + Transform: Comprimir al vuelo
+app.get('/download-gz/:file', (req, res) => {
+  res.setHeader('Content-Encoding', 'gzip');
+  fs.createReadStream(`./files/${req.params.file}`)
+    .pipe(zlib.createGzip())
+    .pipe(res);
+});
+```
+
+---
 
 ## ¿Qué es Backpressure?
 
