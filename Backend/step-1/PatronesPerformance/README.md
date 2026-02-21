@@ -27,6 +27,7 @@
 - [Memoization Pattern](23-memoization-pattern.md)
 - [Prefetching Pattern](24-prefetching-pattern.md)
 - [Server-Side Rendering (SSR) Pattern](25-ssr-pattern.md)
+- [Locking Patterns (Optimistic & Pessimistic)](26-locking-patterns.md)
 - [Streaming de respuestas](streaming-respuestas.md)
 - [Keep-Alive](keep-alive.md)
 
@@ -106,6 +107,9 @@
 
 25. **Server-Side Rendering (SSR) Pattern**
     Renderizado del contenido en el servidor para mejorar tiempo de carga inicial.
+
+26. **Locking Patterns (Optimistic & Pessimistic)**
+    Estrategias para manejar acceso concurrente a recursos compartidos, previniendo condiciones de carrera.
 
 ---
 
