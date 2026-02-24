@@ -4,6 +4,8 @@
 
 Node.js incluye el módulo `http` para crear servidores web sin dependencias externas.
 
+HTTP es un protocolo de aplicación que define cómo un cliente y un servidor se comunican mediante requests y responses.
+
 ```javascript
 // ✅ BIEN: Servidor básico
 const http = require('http');

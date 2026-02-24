@@ -450,6 +450,9 @@ console.log(any); // 'Success'
 
 ### Batching con límite de concurrencia
 
+``` Procesas muchas tareas dividiéndolas en lotes (batches), ejecutando solo un número máximo de tareas al mismo tiempo, para evitar saturar el Event Loop, el thread pool o recursos externos (DB, APIs, CPU).```
+
+
 ```javascript
 async function batchProcess(items, batchSize) {
   const results = [];
@@ -478,6 +481,7 @@ const results = await Promise.all(
 ```
 
 ### Retry con exponential backoff
+```Cuando una operación falla, no se reintenta inmediatamente, sino que se vuelve a intentar después de un tiempo que crece exponencialmente en cada intento.```
 
 ```javascript
 async function retryWithBackoff(fn, maxRetries = 3) {
@@ -498,7 +502,7 @@ const data = await retryWithBackoff(() => fetchData());
 ```
 
 ### Race con todas las Promises
-
+```jEjecutas múltiples Promises en paralelo y reaccionas a la que se resuelve o rechaza primero, cancelando, ignorando o dejando morir las demás.```j
 ```javascript
 // race pero obtener todas las respuestas
 async function raceAll(promises) {
@@ -527,7 +531,7 @@ async function raceAll(promises) {
 ```
 
 ### Promise pool
-
+```Ejecutas un conjunto grande de Promises limitando cuántas se ejecutan simultáneamente, manteniendo un pool activo que se va rellenando conforme las Promises terminan.```
 ```javascript
 class PromisePool {
   constructor(concurrency = 5) {

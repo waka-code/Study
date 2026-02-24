@@ -478,7 +478,7 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  # Métodos de clase
+  # Métodos de clasehttp://localhost:3000/setting/user
   def self.admins
     where(role: "admin")
   end

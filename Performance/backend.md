@@ -30,6 +30,8 @@ async function getUser(id) {
 ## Concurrencia y asincronía
 - Usa workers, colas o threads para tareas pesadas.
 
+## Ruby es con background job - sidekip
+
 ### Ejemplo (Node.js)
 ```js
 const { Worker } = require('worker_threads');
