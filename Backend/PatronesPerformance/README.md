@@ -28,6 +28,11 @@
 - [Prefetching Pattern](24-prefetching-pattern.md)
 - [Server-Side Rendering (SSR) Pattern](25-ssr-pattern.md)
 - [Locking Patterns (Optimistic & Pessimistic)](26-locking-patterns.md)
+- [Latency & Throughput](27-latency-throughput.md)
+- [CPU & Memory Bottlenecks](28-cpu-memory-bottlenecks.md)
+- [Database Latency](29-database-latency.md)
+- [N+1 Query Problem](30-n-plus-1.md)
+- [Load Balancing](31-load-balancing.md)
 - [Streaming de respuestas](streaming-respuestas.md)
 - [Keep-Alive](keep-alive.md)
 
@@ -110,6 +115,21 @@
 
 26. **Locking Patterns (Optimistic & Pessimistic)**
     Estrategias para manejar acceso concurrente a recursos compartidos, previniendo condiciones de carrera.
+
+27. **Latency & Throughput**
+    Las métricas base: cuánto tarda una operación y cuántas se completan por segundo (percentiles, Ley de Little).
+
+28. **CPU & Memory Bottlenecks**
+    Diagnóstico de procesos CPU-bound, memory leaks y presión de GC antes de escalar.
+
+29. **Database Latency**
+    Fuentes de latencia en la DB (pool, round trips, full scans, locks) y cómo reducirlas.
+
+30. **N+1 Query Problem**
+    Anti-patrón de una query por elemento; se resuelve con eager loading, IN o DataLoader.
+
+31. **Load Balancing**
+    Distribución del tráfico entre instancias: L4 vs L7, algoritmos, health checks.
 
 ---
 

@@ -4,7 +4,7 @@ Carga anticipada de datos relacionados para evitar múltiples accesos repetidos.
 
 **Ventajas:**
 - Reduce el número de consultas.
-- Evita el problema N+1.
+- Evita el problema [N+1](30-n-plus-1.md).
 
 **Trade-off:**
 - Puede cargar más datos de los necesarios.

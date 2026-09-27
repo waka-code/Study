@@ -2,6 +2,7 @@
 
 ## ¿Cuándo usarlo?
 Cuando necesitas crear familias de objetos relacionados sin especificar sus clases concretas.
+Familia de productos
 
 ## Explicación simple (analogía de IKEA)
 
@@ -89,3 +90,9 @@ class MacFactory implements GUIFactory {
   createCheckbox() { return new MacCheckbox(); }
 }
 ```
+
+
+interface define el contrato
+clase concreta implementa detalles
+clase base orquesta el flujo 
+sub clase deciden que objeto crear

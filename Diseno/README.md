@@ -11,21 +11,35 @@ A veces, aplicar un patrón de diseño puede añadir complejidad innecesaria si 
 ## Índice  
 
 ### Creacionales
-- [Factory](./Factory.md)
-- [Abstract Factory](./AbstractFactory.md)
-- [Builder](./Builder.md)
-- [Singleton](./Singleton.md)
+Proporcionan mecanismos de creación de objetos que incrementan la flexibilidad y la reutilización del código existente.
+- [Factory Method](./Creacionales/Factory.md)
+- [Abstract Factory](./Creacionales/AbstractFactory.md)
+- [Builder](./Creacionales/Builder.md)
+- [Prototype](./Creacionales/Prototype.md)
+- [Singleton](./Creacionales/Singleton.md)
 
 ### Estructurales
-- [Adapter](./Adapter.md)
-- [Facade](./Facade.md)
-- [Decorator](./Decorator.md)
+Explican cómo ensamblar objetos y clases en estructuras más grandes, manteniendo la flexibilidad y eficiencia de la estructura.
+- [Adapter](./Estructurales/Adapter.md)
+- [Bridge](./Estructurales/Bridge.md)
+- [Composite](./Estructurales/Composite.md)
+- [Decorator](./Estructurales/Decorator.md)
+- [Facade](./Estructurales/Facade.md)
+- [Flyweight](./Estructurales/Flyweight.md)
+- [Proxy](./Estructurales/Proxy.md)
 
 ### Comportamiento
-- [Strategy](./Strategy.md)
-- [Observer](./Observer.md)
-- [Command](./Command.md)
-- [State](./State.md)
+Tratan con algoritmos y la asignación de responsabilidades entre objetos.
+- [Chain of Responsibility](./Comportamiento/ChainOfResponsibility.md)
+- [Command](./Comportamiento/Command.md)
+- [Iterator](./Comportamiento/Iterator.md)
+- [Mediator](./Comportamiento/Mediator.md)
+- [Memento](./Comportamiento/Memento.md)
+- [Observer](./Comportamiento/Observer.md)
+- [State](./Comportamiento/State.md)
+- [Strategy](./Comportamiento/Strategy.md)
+- [Template Method](./Comportamiento/TemplateMethod.md)
+- [Visitor](./Comportamiento/Visitor.md)
 
 ---
 
