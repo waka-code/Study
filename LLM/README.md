@@ -51,6 +51,7 @@ Apuntes para explicar LLMs con criterio de backend senior: qué son, cómo se in
 - [29 · Agentes y agentic loops](29-agentes-y-agentic-loops.md)
 - [30 · MCP (Model Context Protocol)](30-mcp-model-context-protocol.md)
 - [34 · Arquitectura LLM en producción (system design)](34-arquitectura-llm-en-produccion.md)
+- [35 · Spec-Driven Development (SDD)](35-spec-driven-development.md)
 
 ---
 
@@ -61,6 +62,6 @@ Apuntes para explicar LLMs con criterio de backend senior: qué son, cómo se in
 3. **RAG completo (días 3–4):** 09 → 10 → 12 → 13 → 14 → 11 → 15 → 28.
 4. **Producción (día 5):** 17 → 19 → 18 → 27 → 20 → 21 → 32 → 31.
 5. **Calidad y seguridad (día 6):** 22 → 23 → 24 → 25.
-6. **Cierre (día 7):** 29 → 30 → 34. Practica en voz alta "diseña un chatbot con RAG sobre documentos internos".
+6. **Cierre (día 7):** 29 → 30 → 35 → 34. Practica en voz alta "diseña un chatbot con RAG sobre documentos internos".
 
 > 💡 Cada archivo termina con **🎤 Preguntas de entrevista**. Repásalas respondiendo sin mirar y después compara.
